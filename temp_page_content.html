@@ -1,0 +1,759 @@
+
+<!DOCTYPE html>
+
+<html translate="no" lang="zh-TW">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6N2WKSESQ0"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-6N2WKSESQ0');
+    </script>
+
+    <title>臺大醫院網路掛號系統</title>
+    <link rel="icon" type="image/x-icon" href="../img/logo.ico" />
+    
+</head>
+
+<body style="padding: 0px;">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../lib/bootstrap/icons/bootstrap-icons.css" rel="stylesheet" />
+
+        <link rel="stylesheet" href="../css/style.css" />
+        <link rel="stylesheet" href="../css/main_style.css">
+        <link rel="stylesheet" href="../css/first_clinic_form_style.css">
+        <link rel="stylesheet" href="../css/checkbox.css">
+    <link rel="stylesheet" href="../css/radio.css">
+    <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.css">
+
+    <script src="../scripts/jquery-3.7.1.min.js"></script>
+    <script src="../scripts/popper.min.js"></script>
+    <script src="../lib/bootstrap/js/bootstrap.js"></script>
+    <script src="../scripts/top.js"></script>
+    <script src="../scripts/regDeptAndFormUI.js"></script>
+
+    
+
+<link href="../lib/bootstrap/icons/bootstrap-icons.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/style.css" />
+
+<nav class="navbar navbar-dark bg-dark navbar-expand-lg header">
+    <div class="container-xxl">
+        <div class="col index-container ms-0">
+            <div class="row justify-content-start align-items-center">
+                <div class="col-sm-auto col-auto p-0">
+                    <a style="color:white" href="#U" id="AU" name="U" title="上方功能區" accesskey="U">:::</a>
+                </div>
+                <div class="col-sm-auto col-3 ps-0">
+                    <a class="navbar-brand" href="/WebReg/WebReg/Index">
+                        <img src="../img/00.systemIndex/logo_white.png" alt="" style="width: 120px; max-width: 100%;">
+                    </a>
+                </div>
+                <div class="col-sm-auto col px-0">
+                    <div class="ntuh-title">
+                        <a class="navbar-brand" href="/WebReg/WebReg/Index">
+                            網路掛號服務
+                        </a>
+                    </div>
+                    <div class="ntuh-subtitle">
+                        <a class="navbar-brand" href="/WebReg/WebReg/BranchIndex?vHospCode=T0">總院</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-auto col-2">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleContent"
+                    aria-controls="navbarToggleContent" aria-expanded="false" aria-label="切換導覽列">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+
+        <div id="navbarToggleContent" class="collapse navbar-collapse">
+            <div class="row g-2 header-collapse">
+                <div class="col-lg-8 col-8">
+                    <!--關鍵字搜尋功能，先暫時關閉-->
+                    <!--<input class="form-control form-control-sm input-search" placeholder="請輸入關鍵字" />-->
+                </div>
+                <div class="col-4 col-lg-auto col-xl-2 d-grid gap-2">
+                    <div class="btn-group btn-group-sm" role="group" aria-label="網站語言">
+
+<form action="/WebReg/WebReg/ChangeLang" class="inline-form" method="post"><input name="__RequestVerificationToken" type="hidden" value="zXbNYrhemb-lhDw90Tr3ZWLCrY2TnAiqt8JEwpb8qXOgTrONwa2x8HnwiHLFXZxEZwLoUSraHnwosvfVOwMQHPhpvH33c3hQMb9xxq0qIVw1" />                            <input type="hidden" name="langName" value="zh-TW" />
+                            <button type="submit" class="btn btn-outline-white active">中</button></form>
+<form action="/WebReg/WebReg/ChangeLang" class="inline-form" method="post"><input name="__RequestVerificationToken" type="hidden" value="ZyfUIAgdtdMsXlcMs9CaBB7BhhazJmmNy3U9auiJhi7ISv2lLfT-ZWbKXPvDcddGCHeQsLJUcQ0VNtRyPUoVZuwVbHIsikkC22GrVhOPzsA1" />                            <input type="hidden" name="langName" value="en-US" />
+                            <button type="submit" class="btn btn-outline-white ">EN</button></form>                    </div>
+                </div>
+                <div class="col-md-4 col-4 mb-3">
+                    <div class="dropdown d-grid gap-2 h-100">
+                        <button type="button" class="btn btn-sm btn-outline-white dropdown-toggle"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                            網路掛號
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <!--科部掛號-->
+                                <a class="dropdown-item main-menu-drop-down-item" href="/WebReg/WebReg/RegShowBlock?vHospCode=T0">依科別掛號</a>
+                                <!--展開大科系-->
+                                    <ul>
+                                            <li>
+                                                <a class="dropdown-item main-menu-drop-down-item" href="RegDeptInfo?vHospCode=T0&amp;showBlock=A">
+                                                    - 內科系
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item main-menu-drop-down-item" href="RegDeptInfo?vHospCode=T0&amp;showBlock=B">
+                                                    - 外科系
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item main-menu-drop-down-item" href="./BranchIndex?vHospCode=CH">
+                                                    - 兒童醫院
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item main-menu-drop-down-item" href="RegDeptInfo?vHospCode=T0&amp;showBlock=E">
+                                                    - 其他科系
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item main-menu-drop-down-item" href="RegDeptInfo?vHospCode=T0&amp;showBlock=F">
+                                                    - 特色門診
+                                                </a>
+                                            </li>
+                                    </ul>  
+                            </li>
+                            <!--依病症掛號-->
+                                <li><a class="dropdown-item main-menu-drop-down-item" href="https://reg.ntuh.gov.tw/WebReg/WebReg/RegDeptSearch?vHospCode=T0&amp;searchMode=byDisease" target="_blank">依病症掛號</a></li>
+                            <!--依醫師姓名掛號-->
+                            <li><a class="dropdown-item main-menu-drop-down-item" href="/WebReg/WebReg/RegByDrName?vHospCode=T0">依醫事人員掛號</a></li>
+                            <!--疫苗門診-->
+                                <li><a class="dropdown-item main-menu-drop-down-item" href="https://reg.ntuh.gov.tw/WebReg/WebReg/Announcements?vHospCode=T0" target="_blank">疫苗相關門診</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4 col-4 mb-3">
+                    <div class="dropdown d-grid gap-2 h-100">
+                        <button type="button" class="btn btn-sm btn-outline-white dropdown-toggle"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                            <!--其他服務-->
+                            其他服務
+                        </button>
+                        <ul class="dropdown-menu">
+                            <!--看診進度查詢-->
+                            <li><a class="dropdown-item main-menu-drop-down-item" href="/WebReg/WebReg/ClinicCurrentLightNo?vHospCode=T0">當日看診進度查詢</a></li>
+                            <!--查詢取消掛號-->
+                            <li><a class="dropdown-item main-menu-drop-down-item" href="/WebReg/WebReg/InquiryCancelReg?vHospCode=T0">查詢(取消)掛號</a></li>
+                            <!--初診資料填寫-->
+                            <li><a class="dropdown-item main-menu-drop-down-item" href="/WebReg/WebReg/FirstVisitMain?vHospCode=T0">初診資料填寫</a></li>
+                            <!--醫事人員請假查詢-->
+                            <li><a class="dropdown-item main-menu-drop-down-item" href="/WebReg/WebReg/InquiryDayoff?vHospCode=T0">醫事人員請假查詢</a></li>
+                            <!--下載門診表-->
+                                <li><a class="dropdown-item main-menu-drop-down-item" href="https://www.ntuh.gov.tw/ntuh/Fpage.action?muid=3224&amp;fid=2974" target="_blank">下載門診表</a></li>
+                            <!--臺大體系官網-->
+                            <li><a class="dropdown-item main-menu-drop-down-item" href="https://www.ntuh.gov.tw/ntuh/ntuhgroup.jsp" target="_blank">臺大醫院體系官方網站</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4 col-4 mb-3">
+                    <div class="dropdown d-grid gap-2 h-100">
+                        <button type="button" class="btn btn-sm btn-outline-white dropdown-toggle"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                            <!--常見問題-->
+                            常見問題
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <!--常見問題-->
+                            <li><a class="dropdown-item main-menu-drop-down-item" href="/WebReg/WebReg/Faq?vHospCode=T0">常見問題</a></li>
+                                <!--總院/兒醫，本院就醫流程-->
+                                <li><a class="dropdown-item main-menu-drop-down-item" href="https://www.ntuh.gov.tw/OPD/Fpage.action?fid=8391" target="_blank">本院就醫流程</a></li>
+                            <!--無障礙條款-->
+                            <li><a class="dropdown-item main-menu-drop-down-item" href="/WebReg/WebReg/Accessibility?vHospCode=T0" target="_blank">無障礙網頁說明</a></li>
+                            <!--隱私權及資安政策-->
+                            <li><a class="dropdown-item main-menu-drop-down-item" href="https://www.ntuh.gov.tw/ntuh/Fpage.action?muid=51&fid=2945" target="_blank">隱私權保護及資訊安全政策</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<style>
+    .inline-form {
+        display: inline;
+    }
+</style>
+    
+
+<div id="main">
+    <div class="main-container">
+
+        <label></label>
+        <label class="title">
+            <a href="#C" id="AC" name="C" title="資料內容區" accesskey="C">:::</a>
+            總院 / 依科別掛號 / 請選擇科系
+        </label>
+<form action="/WebReg/WebReg/RegDeptSearch" method="post"><input name="__RequestVerificationToken" type="hidden" value="r_m7CWg2Ue_5kj_Z3c52TRC_O0GkbQW81ZrG8_lDeceylTVqgpNPLSJIzp1X9wn7a5dcDPsI_Nl6Ap8zhs-i4zK_cdC5cr2Vla5AfM07MW41" />            <div class="search-block">
+                <div class="search-title">搜尋列</div>
+                <div class="warning-word">※ 請輸入關鍵字搜尋本院的科部/次專科介紹。</div>
+                <div class="row mt-3 gx-0">
+                        <div class="col-md-2 col-12">
+                            <select class="form-select" id="selectedVDeptCode" name="selectedVDeptCode" style="min-height:2rem;font-size:1.1rem"><option value="">搜尋全部科部
+</option>
+<option value="MED">內科部</option>
+<option value="GERO">老年醫學部</option>
+<option value="FM">家庭醫學部</option>
+<option value="NEUR">神經部</option>
+<option value="GENE">基因醫學部</option>
+<option value="PMR">復健部</option>
+<option value="ONC">腫瘤醫學部</option>
+<option value="PSYC">精神部</option>
+<option value="EOM">環境暨職業醫學部</option>
+<option value="SURG">外科部</option>
+<option value="ORTH">骨科部</option>
+<option value="OBGY">婦產部</option>
+<option value="OPH">眼科部</option>
+<option value="ENT">耳鼻喉部</option>
+<option value="DENT">口腔醫學部</option>
+<option value="DERM">皮膚部</option>
+<option value="URO">泌尿部</option>
+<option value="PC">麻醉部</option>
+<option value="HEMP">血友病中心</option>
+<option value="CHA">形體美容中心</option>
+<option value="KBRC">乳房醫學中心</option>
+<option value="CPC">臨床心理中心</option>
+<option value="RAD">影像醫學部</option>
+<option value="NUTR">營養室</option>
+<option value="NM">核子醫學部</option>
+<option value="EER">傷口造護小組</option>
+</select>
+                        </div>
+                    <div class="col me-2">
+                        <input type="text" name="searchInput" id="searchInput" class="form-control form-control-sm input-search"
+                               style="height:2rem;font-size:1.3rem"
+                               placeholder="請輸入病症、疾病或症狀的關鍵字"
+                               value="" />
+
+                        <input type="hidden" name="vHospCode" value="T0" />
+                        <!--本頁的預設搜尋模式為 科部-->
+                        <input type="hidden" name="searchMode" value="byDept" />
+                    </div>
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-primary">查詢</button>
+                        <button type="button" class="btn btn-primary" onclick="regDeptSearchClear();">清除</button>
+                    </div>
+                </div>
+            </div>
+</form>        <div class="row">
+                    <div class="big-dep-style col-12 col-md-6 mt-4">
+                        <div class="inter big-dep-name">
+                                <!--沒有外部連結-->
+                                <div class="title">
+                                    內科系
+                                    <div class="content">
+
+                                            <div class="row mt-2 g-2 w-100">
+                                                    <div class="col-6">
+                                                        <a href="/WebReg/WebReg/RegDeptSchedule?vHospCode=T0&amp;vDeptCode=MED&amp;showBlock=A" >
+                                                            <div class="dep-name-border">內科部</div>
+                                                        </a>
+
+                                                    </div>
+                                                        <div class="col-6">
+                                                            <a href="/WebReg/WebReg/RegDeptSchedule?vHospCode=T0&amp;vDeptCode=PMR&amp;showBlock=A" >
+                                                                <div class="dep-name-border">
+                                                                    復健部
+                                                                </div>
+                                                            </a>
+
+                                                        </div>
+                                                    <div class="col-6">
+                                                        <a href="/WebReg/WebReg/RegDeptSchedule?vHospCode=T0&amp;vDeptCode=GERO&amp;showBlock=A" >
+                                                            <div class="dep-name-border">老年醫學部</div>
+                                                        </a>
+
+                                                    </div>
+                                                        <div class="col-6">
+                                                            <a href="/WebReg/WebReg/RegDeptSchedule?vHospCode=T0&amp;vDeptCode=ONC&amp;showBlock=A" >
+                                                                <div class="dep-name-border">
+                                                                    腫瘤醫學部
+                                                                </div>
+                                                            </a>
+
+                                                        </div>
+                                                    <div class="col-6">
+                                                        <a href="/WebReg/WebReg/RegDeptSchedule?vHospCode=T0&amp;vDeptCode=FM&amp;showBlock=A" >
+                                                            <div class="dep-name-border">家庭醫學部</div>
+                                                        </a>
+
+                                                    </div>
+                                                        <div class="col-6">
+                                                            <a href="/WebReg/WebReg/RegDeptSchedule?vHospCode=T0&amp;vDeptCode=PSYC&amp;showBlock=A" >
+                                                                <div class="dep-name-border">
+                                                                    精神部
+                                                                </div>
+                                                            </a>
+
+                                                        </div>
+                                                    <div class="col-6">
+                                                        <a href="/WebReg/WebReg/RegDeptSchedule?vHospCode=T0&amp;vDeptCode=NEUR&amp;showBlock=A" >
+                                                            <div class="dep-name-border">神經部</div>
+                                                        </a>
+
+                                                    </div>
+                                                        <div class="col-6">
+                                                            <a href="/WebReg/WebReg/RegDeptSchedule?vHospCode=T0&amp;vDeptCode=EOM&amp;showBlock=A" >
+                                                                <div class="dep-name-border">
+                                                                    環境暨職業醫學部
+                                                                </div>
+                                                            </a>
+
+                                                        </div>
+                                                    <div class="col-12">
+                                                        <a href="/WebReg/WebReg/RegDeptSchedule?vHospCode=T0&amp;vDeptCode=GENE&amp;showBlock=A" >
+                                                            <div class="dep-name-border">基因醫學部</div>
+                                                        </a>
+
+                                                    </div>
+                                            </div>
+
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="big-dep-style col-12 col-md-6 mt-4">
+                        <div class="surgery big-dep-name">
+                                <!--沒有外部連結-->
+                                <div class="title">
+                                    外科系
+                                    <div class="content">
+
+                                            <div class="row mt-2 g-2 w-100">
+                                                    <div class="col-6">
+                                                        <a href="/WebReg/WebReg/RegDeptSchedule?vHospCode=T0&amp;vDeptCode=SURG&amp;showBlock=B" >
+                                                            <div class="dep-name-border">外科部</div>
+                                                        </a>
+
+                                                    </div>
+                                                        <div class="col-6">
+                                                            <a href="/WebReg/WebReg/RegDeptSchedule?vHospCode=T0&amp;vDeptCode=DENT&amp;showBlock=B" >
+                                                                <div class="dep-name-border">
+                                                                    口腔醫學部
+                                                                </div>
+                                                            </a>
+
+                                                        </div>
+                                                    <div class="col-6">
+                                                        <a href="/WebReg/WebReg/RegDeptSchedule?vHospCode=T0&amp;vDeptCode=ORTH&amp;showBlock=B" >
+                                                            <div class="dep-name-border">骨科部</div>
+                                                        </a>
+
+                                                    </div>
+                                                        <div class="col-6">
+                                                            <a href="/WebReg/WebReg/RegDeptSchedule?vHospCode=T0&amp;vDeptCode=DERM&amp;showBlock=B" >
+                                                                <div class="dep-name-border">
+                                                                    皮膚部
+                                                                </div>
+                                                            </a>
+
+                                                        </div>
+                                                    <div class="col-6">
+                                                        <a href="/WebReg/WebReg/RegDeptSchedule?vHospCode=T0&amp;vDeptCode=OBGY&amp;showBlock=B" >
+                                                            <div class="dep-name-border">婦產部</div>
+                                                        </a>
+
+                                                    </div>
+                                                        <div class="col-6">
+                                                            <a href="/WebReg/WebReg/RegDeptSchedule?vHospCode=T0&amp;vDeptCode=URO&amp;showBlock=B" >
+                                                                <div class="dep-name-border">
+                                                                    泌尿部
+                                                                </div>
+                                                            </a>
+
+                                                        </div>
+                                                    <div class="col-6">
+                                                        <a href="/WebReg/WebReg/RegDeptSchedule?vHospCode=T0&amp;vDeptCode=OPH&amp;showBlock=B" >
+                                                            <div class="dep-name-border">眼科部</div>
+                                                        </a>
+
+                                                    </div>
+                                                        <div class="col-6">
+                                                            <a href="/WebReg/WebReg/RegDeptSchedule?vHospCode=T0&amp;vDeptCode=PC&amp;showBlock=B" >
+                                                                <div class="dep-name-border">
+                                                                    麻醉部
+                                                                </div>
+                                                            </a>
+
+                                                        </div>
+                                                    <div class="col-12">
+                                                        <a href="/WebReg/WebReg/RegDeptSchedule?vHospCode=T0&amp;vDeptCode=ENT&amp;showBlock=B" >
+                                                            <div class="dep-name-border">耳鼻喉部</div>
+                                                        </a>
+
+                                                    </div>
+                                            </div>
+
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="big-dep-style col-12 col-md-6 mt-4">
+                        <div class="child big-dep-name">
+                                <!--有外部連結-->
+                                <a href="./BranchIndex?vHospCode=CH">
+                                    <div class="title">
+                                        兒童醫院
+                                        <div class="content">
+                                            建議<font color=red>18歲以下兒童</font>，至兒童醫院掛號就醫
+                                        </div>
+                                    </div>
+                                </a>
+                        </div>
+                    </div>
+                    <div class="big-dep-style col-12 col-md-6 mt-4">
+                        <div class="center big-dep-name">
+                                <!--沒有外部連結-->
+                                <div class="title">
+                                    其他科系
+                                    <div class="content">
+
+                                            <div class="row mt-2 g-2 w-100">
+                                                    <div class="col-6">
+                                                        <a href="/WebReg/WebReg/RegDeptSchedule?vHospCode=T0&amp;vDeptCode=HEMP&amp;showBlock=E" >
+                                                            <div class="dep-name-border">血友病中心</div>
+                                                        </a>
+
+                                                    </div>
+                                                        <div class="col-6">
+                                                            <a href="/WebReg/WebReg/RegDeptSchedule?vHospCode=T0&amp;vDeptCode=RAD&amp;showBlock=E" >
+                                                                <div class="dep-name-border">
+                                                                    影像醫學部
+                                                                </div>
+                                                            </a>
+
+                                                        </div>
+                                                    <div class="col-6">
+                                                        <a href="/WebReg/WebReg/RegDeptSchedule?vHospCode=T0&amp;vDeptCode=CHA&amp;showBlock=E" >
+                                                            <div class="dep-name-border">形體美容中心</div>
+                                                        </a>
+
+                                                    </div>
+                                                        <div class="col-6">
+                                                            <a href="/WebReg/WebReg/RegDeptSchedule?vHospCode=T0&amp;vDeptCode=NUTR&amp;showBlock=E" >
+                                                                <div class="dep-name-border">
+                                                                    營養室
+                                                                </div>
+                                                            </a>
+
+                                                        </div>
+                                                    <div class="col-6">
+                                                        <a href="/WebReg/WebReg/RegDeptSchedule?vHospCode=T0&amp;vDeptCode=KBRC&amp;showBlock=E" >
+                                                            <div class="dep-name-border">乳房醫學中心</div>
+                                                        </a>
+
+                                                    </div>
+                                                        <div class="col-6">
+                                                            <a href="/WebReg/WebReg/RegDeptSchedule?vHospCode=T0&amp;vDeptCode=NM&amp;showBlock=E" >
+                                                                <div class="dep-name-border">
+                                                                    核子醫學部
+                                                                </div>
+                                                            </a>
+
+                                                        </div>
+                                                    <div class="col-6">
+                                                        <a href="/WebReg/WebReg/RegDeptSchedule?vHospCode=T0&amp;vDeptCode=CPC&amp;showBlock=E" >
+                                                            <div class="dep-name-border">臨床心理中心</div>
+                                                        </a>
+
+                                                    </div>
+                                                        <div class="col-6">
+                                                            <a href="/WebReg/WebReg/RegDeptSchedule?vHospCode=T0&amp;vDeptCode=EER&amp;showBlock=E" >
+                                                                <div class="dep-name-border">
+                                                                    傷口造護小組
+                                                                </div>
+                                                            </a>
+
+                                                        </div>
+                                            </div>
+
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="big-dep-style col mt-4">
+                        <div class="other big-dep-name">
+                                <!--沒有外部連結-->
+                                <div class="title">
+                                    特色門診
+                                    <div class="content">
+
+                                            <div class="row mt-2 g-2 w-100">
+                                                    <div class="col-6">
+                                                        <a href="RegDeptSchedule?vhospCode=T0&amp;showBlock=F&amp;vDeptCode=PC&amp;realSubDeptCode=02" target=&#39;_blank&#39;>
+                                                            <div class="dep-name-border">手術加速康復(ERAS)門診</div>
+                                                        </a>
+
+                                                    </div>
+                                                        <div class="col-6">
+                                                            <a href="https://www.ntuh.gov.tw/aya/Fpage.action?muid=&amp;fid=7592" target=&#39;_blank&#39;>
+                                                                <div class="dep-name-border">
+                                                                    青少年親善照護門診
+                                                                </div>
+                                                            </a>
+
+                                                        </div>
+                                                    <div class="col-6">
+                                                        <a href="https://www.ntuh.gov.tw/SLP/Fpage.action?muid=5353&amp;fid=5930" target=&#39;_blank&#39;>
+                                                            <div class="dep-name-border">睡眠中心</div>
+                                                        </a>
+
+                                                    </div>
+                                                        <div class="col-6">
+                                                            <a href="RegDeptSchedule?vHospCode=CH&amp;vDeptCode=36&amp;showBlock=B" target=&#39;_blank&#39;>
+                                                                <div class="dep-name-border">
+                                                                    特殊需求者口腔醫學科
+                                                                </div>
+                                                            </a>
+
+                                                        </div>
+                                                    <div class="col-6">
+                                                        <a href="https://www.ntuh.gov.tw/cvc/Fpage.action?muid=6654&amp;fid=7153" target=&#39;_blank&#39;>
+                                                            <div class="dep-name-border">瓣膜性心臟病暨微創治療門診</div>
+                                                        </a>
+
+                                                    </div>
+                                                        <div class="col-6">
+                                                            <a href="/WebReg/WebReg/RegDeptSchedule?vHospCode=T0&amp;vDeptCode=ACP&amp;showBlock=F" >
+                                                                <div class="dep-name-border">
+                                                                    預立醫療照護諮商
+                                                                </div>
+                                                            </a>
+
+                                                        </div>
+                                                    <div class="col-6">
+                                                        <a href="https://www.ntuh.gov.tw/RMC/Fpage.action?fid=5826" target=&#39;_blank&#39;>
+                                                            <div class="dep-name-border">成人慢性病整合門診</div>
+                                                        </a>
+
+                                                    </div>
+                                                        <div class="col-6">
+                                                            <a href="https://www.ntuh.gov.tw/ntuh/FormDataFrame.action?link=AJY1OcrBVO&amp;c=&amp;of=&amp;ot=A&amp;search=&amp;pagenum=1&amp;qconditions=&amp;qf=&amp;qs=%E7%B7%A9%E5%92%8C" target=&#39;_blank&#39;>
+                                                                <div class="dep-name-border">
+                                                                    安寧緩和醫療
+                                                                </div>
+                                                            </a>
+
+                                                        </div>
+                                            </div>
+
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+        </div>
+
+        <div class="col" style="background-color: #fff;">
+            <div class="two-block">
+                
+
+
+<div class="precaution">
+        <div class="precaution-content p-md-5 p-3">
+            <div class="row justify-content-center">
+    <div class="col-auto">
+        <label class="title-sm px-4">掛號服務</label>
+    </div>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-12">
+        <div style="text-align: center;font-size:1.2rem"><b>本院看診時間：上午門診09:00~12:00、下午門診13:30~16:30</b></div>
+        <ol class="precaution-list" style="list-style-type: cjk-ideographic;">
+		    <li>
+                <div class="precaution-item"><strong>轉診掛號</strong>
+				<ol style="list-style-type: decimal;">
+                    <li>
+                        <div class="precaution-item">
+                            <strong>總院門診</strong>：請先填寫<a href="https://redcap.ntuh.gov.tw/surveys/?s=YFLMCMHPD4YRRYXW" target="_blank">線上表單(連結)</a>，或將轉診單傳真至(02)2382-5540，並於週一~週五8:00~ 17:00電洽(02)2312-3456轉267221預約掛號，額滿為止。
+                        </div>
+                    </li>
+					<li>
+                        <div class="precaution-item">
+                            <strong>兒醫門診</strong>：請先填寫<a href="https://redcap.ntuh.gov.tw/surveys/?s=YFLMCMHPD4YRRYXW" target="_blank">線上表單(連結)</a>，或將轉診單傳真至(02)2331-0209，並於週一~週五8:00~ 17:00電洽(02)2312-3456轉270169預約掛號，額滿為止。
+                        </div>
+                    </li>
+			    </ol>
+            </li>
+            <li>
+                <div class="precaution-item"><strong>一般掛號方式</strong></div>
+                <ol style="list-style-type: decimal;">
+                    <li>
+                        <div class="precaution-item">
+                            <strong><a href="https://reg.ntuh.gov.tw/WebReg/WebReg/BranchIndex?vHospCode=T0" target="_blank">網路掛號</a>：</strong>第一次開放掛號時間為兩週前00:00，第二次開放掛號時間為門診前一日18:00，額滿為止。
+                        </div>
+                    </li>
+                    <li>
+                        <div class="precaution-item">
+                            <strong>櫃檯掛號：</strong>可掛14日內門診，當日上午門診掛號時間至10:30，當日下午門診掛號時間至 15:00，額滿為止。<br/>
+                            (1)總院櫃檯：服務時間週一~週五 7:45~20:00。<br/>
+                            (2)兒醫櫃檯：服務時間週一~週五 7:45~19:30；週六7:45~12:00。<br/>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="precaution-item">
+                            <strong><a href="https://www.ntuh.gov.tw/ntuh/Fpage.action?muid=3216&fid=3018" target="_blank">語音掛號</a>專線：</strong> (02)2356-7890
+                        </div>
+                    </li>
+                    <li>
+                        <div class="precaution-item">
+                            <strong><a href="https://www.ntuh.gov.tw/ntuh/Fpage.action?muid=3216&fid=3018" target="_blank">人工預約掛號</a>專線：</strong> (02)2356-2996，週一~週五8:00~17:00以本院網路掛號頁面協助民眾掛號，額滿為止。
+                        </div>
+                    </li>
+                    <li>
+                        <div class="precaution-item">
+                            <strong>APP掛號：</strong>請下載「<a href="https://www.ntuh.gov.tw/ntuh/News.action?q_type=-1&q_itemCode=5411&agroup=a" target="_blank">臺大醫院行動服務APP</a>」。
+                        </div>
+                    </li>
+                    <li>
+                        <div class="precaution-item">
+                            <strong>門診改期：</strong>醫師預約門診病人得改期一次；非醫師預約或自行掛號欲改期者均須自行重新掛號，週一~週五8：00~ 17：00電洽(02)2312-3456，總院門診轉262504或262505、兒醫門診轉270170、270171。」。
+                        </div>
+                    </li>
+                </ol>
+            </li><li>
+                <div class="precaution-item"><strong>貼心小叮嚀</strong></div>
+                <ol style="list-style-type: decimal;">
+                    <li>
+                        <div class="precaution-item">
+                            從未至本院就診之病友以「身分證字號」或「居留證號」掛號後，請先填寫<a href="https://reg.ntuh.gov.tw/WebReg/Reg/FirstVisitMain?vHospCode=T0" target="_blank">基本資料</a>，看診當日上午門診於10:30前、下午門診於15:00前，攜帶雙證件至「掛號收費櫃檯」辦理初診報到手續。
+                        </div>
+                    </li>
+                    <li>
+                        <div class="precaution-item">
+                            <strong>本院初診：</strong>供從未以個人任一證號(含身分證、護照、居留證及其他證件)就診者使用，經查不符資格將立即取消掛號。
+                        </div>
+                    </li>
+                    <li>
+                        <div class="precaution-item">
+                            如欲取消掛號，上午門診最遲於當日9:30前，下午門診最遲於當日14:00前透過臨櫃、電話(語音或人工預約掛號專線)、網路、APP、e院便利站(Kiosk機)取消。
+                            <ul style="list-style-type: disc;">
+                                <li>若半年內連續兩次未到診且未取消掛號預約，則自第二次未到診日起，三個月內僅受理臨櫃掛號。</li>
+                                <li>半年內累積十次取消掛號，則自第十次取消日起，三個月內僅受理臨櫃掛號。</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="precaution-item">
+                            颱風停班時各科部採部分開診，如已預約之病友無法到院，可於1個月內到院現場掛號看診；口腔醫學部(牙科部)已預約病友，請待恢復上班後洽(02)23123456轉267716、267717辦理約診改期。
+                        </div>
+                    </li>
+                    <li>
+                        <div class="precaution-item">
+                            未持健保卡就醫者，請先自費結帳並於10日內持收據及健保卡，至西址一樓出納組19號窗口辦理退費。
+                        </div>
+                    </li>
+                </ol>
+            </li>
+        </ol>
+    </div>
+</div>
+        </div>
+</div>
+
+                
+            </div>
+        </div>
+        <!--圖片版權來源宣告-->
+        <div style="color: #bdbdbd; display:block; margin:15px 0;">圖片來源Freepik / Image by pressfoto on Freepik</div>
+    </div>
+</div>
+    
+
+<div>
+    <div class="footer container-fluid">
+        <div class="footer-top">
+            <div class="footer-content">
+                <a style="color:white" href="#Z" id="AZ" name="Z" title="下方功能區" accesskey="Z">:::</a>
+                <div class="row gx-md-4 gx-xl-5">
+                    <div class="col-auto mb-3 align-self-center">
+                        <img class="footer-logo">
+                    </div>
+                    <div class="ms-auto ms-md-0 col-6 col-md-auto mb-3">
+                        <label class="footer-title">網路掛號</label>
+                        <a href="/WebReg/WebReg/RegShowBlock?vHospCode=T0" class="footer-href">依科別掛號</a>
+                            <a href="https://reg.ntuh.gov.tw/WebReg/WebReg/RegDeptSearch?vHospCode=T0&amp;searchMode=byDisease" class="footer-href" target="_blank">依病症掛號</a>
+                        <a href="/WebReg/WebReg/RegByDrName?vHospCode=T0" class="footer-href">依醫事人員掛號</a>
+                            <a href="https://reg.ntuh.gov.tw/WebReg/WebReg/Announcements?vHospCode=T0" target="_blank" class="footer-href">疫苗相關門診</a>
+                    </div>
+                    <div class="col-6 col-md-auto mb-3">
+                        <label class="footer-title">其他服務</label>
+                        <a href="/WebReg/WebReg/ClinicCurrentLightNo?vHospCode=T0" class="footer-href">當日看診進度查詢</a>
+                        <a href="/WebReg/WebReg/InquiryCancelReg?vHospCode=T0" class="footer-href">查詢(取消)掛號</a>
+                        <a href="/WebReg/WebReg/FirstVisitMain?vHospCode=T0" class="footer-href">初診資料填寫</a>
+                        <a href="/WebReg/WebReg/InquiryDayoff?vHospCode=T0" class="footer-href">醫事人員請假查詢</a>
+                        <a href="https://www.ntuh.gov.tw/ntuh/ntuhgroup.jsp" target="_blank" class="footer-href">臺大醫院體系官方網站</a>
+                    </div>
+                    <div class="col-6 col-md-auto mb-3">
+                        <label class="footer-title">常見問題</label>
+                        <a href="/WebReg/WebReg/OthersInfo?vHospCode=T0" class="footer-href">其他掛號方式</a>
+                        <a href="/WebReg/WebReg/Faq?vHospCode=T0" class="footer-href">常見問題</a>
+                        <!--無障礙條款-->
+                        <a href="/WebReg/WebReg/Accessibility?vHospCode=T0" target="_blank" class="footer-href">無障礙網頁說明</a>
+                        <!--隱私權及資安政策-->
+                        <a href="https://www.ntuh.gov.tw/ntuh/Fpage.action?muid=51&fid=2945" target="_blank" class="footer-href">隱私權保護及資訊安全政策</a>
+                    </div>
+                    <div class="col-12 col-lg mb-3">
+                        <label class="footer-title">臺大醫院網路掛號服務</label>
+                        <div class="row row-cols-2 row-cols-md-3 row-cols-xxl-4 g-2">
+                            <div class="col d-grid gap-2">
+                                <a href="/WebReg/WebReg/BranchIndex?vHospCode=T0" class="btn btn-sm btn-outline-white btn-pill">總院</a>
+                            </div>
+                            <div class="col d-grid gap-2">
+                                <a href="/WebReg/WebReg/BranchIndex?vHospCode=CH" class="btn btn-sm btn-outline-white btn-pill">兒童醫院</a>
+                            </div>
+                            <div class="col d-grid gap-2">
+                                <a href="/WebReg/WebReg/BranchIndex?vHospCode=T2" class="btn btn-sm btn-outline-white btn-pill">北護分院</a>
+                            </div>
+                            <div class="col d-grid gap-2">
+                                <a href="/WebReg/WebReg/BranchIndex?vHospCode=C0" class="btn btn-sm btn-outline-white btn-pill">癌醫中心分院</a>
+                            </div>
+                            <div class="col d-grid gap-2">
+                                <a href="/WebReg/WebReg/BranchIndex?vHospCode=T3" class="btn btn-sm btn-outline-white btn-pill">金山分院</a>
+                            </div>
+                            <div class="col d-grid gap-2">
+                                <a href="/WebReg/WebReg/BranchIndex?vHospCode=T4" class="btn btn-sm btn-outline-white btn-pill">新竹醫院</a>
+                            </div>
+                            <div class="col d-grid gap-2">
+                                <a href="/WebReg/WebReg/BranchIndex?vHospCode=T7" class="btn btn-sm btn-outline-white btn-pill">生醫醫院(含竹東)</a>
+                            </div>
+                            <div class="col d-grid gap-2">
+                                <a href="/WebReg/WebReg/BranchIndex?vHospCode=Y0" class="btn btn-sm btn-outline-white btn-pill">雲林分院</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            CopyRight &#169; 2010-2025 National Taiwan University Hospital All rights reserved.
+            <br />
+            國立臺灣大學醫學院附設醫院所有，未經授權禁止轉載。
+            <br />
+            Version: 1.1.2.4 <span style="margin-left:20px;">最後更新日期: 2026/02/10</span>
+        </div>
+    </div>
+</div>
+
+    <img src="../img/top.gif" class="btn-top" alt="回到最上面"><!--回到最上面-->
+    
+</body>
+</html>
