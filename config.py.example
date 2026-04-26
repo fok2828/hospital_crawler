@@ -1,0 +1,18 @@
+class PersionalInfo():  
+    id = "A123456789"
+    personal_birthday = "19881111"
+    personal_phone = "0912345678"
+
+
+class DoctorInfo(): 
+    doctor_name = "柯文哲"
+    doctor_dep_keyword =  "心臟"
+
+
+class RegistrationRule():
+    registration_date = "2023/04/01"
+    base_url = "https://reg.ntuh.gov.tw/WebReg/WebReg/RegShowBlock?vHospCode=T0"
+    max_refresh_attempts = 5  # 尋找可掛號日期的最大刷新次數
+    max_submit_attempts = 5   # 提交表單的最大嘗試次數
+    max_workers = 1           # 同時執行掛號任務的線程數
+    exclude_keywords = ["額滿", "僅存本院初診", "到診不續掛"]
