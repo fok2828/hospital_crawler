@@ -5,14 +5,29 @@ class PersionalInfo():
 
 
 class DoctorInfo(): 
-    doctor_name = "柯文哲"
-    doctor_dep_keyword =  "心臟"
+    doctor_name = "張文君"
+    doctor_dep_keyword =  "婦產"
+
+class HospitalInfo():
+    hospital_code_mapping = {
+        "總院": "T0",
+        "兒童醫院": "CH",
+        "北護分院": "T2",
+        "癌醫中心分院": "C0",
+        "金山分院": "T3",
+        "新竹臺大分院新竹醫院": "T4",
+        "新竹臺大分院生醫醫院(含竹東)": "T7",
+        "雲林分院": "Y0"
+    }
 
 
 class RegistrationRule():
     registration_date = "2023/04/01"
-    base_url = "https://reg.ntuh.gov.tw/WebReg/WebReg/RegShowBlock?vHospCode=T0"
-    max_refresh_attempts = 5  # 尋找可掛號日期的最大刷新次數
-    max_submit_attempts = 5   # 提交表單的最大嘗試次數
+    hospital_name = "總院"
+    dep_base_url = "https://reg.ntuh.gov.tw/WebReg/WebReg/RegShowBlock?vHospCode="
+    drname_base_url = "https://reg.ntuh.gov.tw/WebReg/WebReg/RegByDrName?vHospCode="
+    wait_check_available_slot_interval = 1   # 等待檢查醫生掛號狀態的間隔時間（秒）
+    wait_check_registration_interval = 0.5     # 等待檢查掛號狀態的間隔時間（秒）
     max_workers = 1           # 同時執行掛號任務的線程數
-    exclude_keywords = ["額滿", "僅存本院初診", "到診不續掛"]
+    exclude_keywords = ["額滿", "僅存本院初診", "到診不續掛", "代診不續掛"]
+    search_hospital_list = ["總院", "北護分院", "癌醫中心分院"]
