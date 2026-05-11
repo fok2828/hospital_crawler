@@ -3,7 +3,7 @@ import time
 import cv2
 import ddddocr
 import numpy as np
-from config import PersionalInfo, DoctorInfo, RegistrationRule
+from config import HospitalInfo, PersionalInfo, DoctorInfo, RegistrationRule
 from PIL import Image
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -12,10 +12,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
 from datetime import datetime, timezone, timedelta
-
-# --- 設定 (請根據您的需求修改) ---
-ID_NUMBER = "A123456789"  # 您的身分證字號
-BIRTHDAY = "19840326"  # 您的生日 (格式: YYYYMMDD)
 
 # 初始化 OCR
 OCR = ddddocr.DdddOcr(show_ad=False)
@@ -61,15 +57,17 @@ def solve_captcha(image_bytes: bytes) -> str:
         print(f"[-] 辨識發生異常: {e}")
         return ""
 
-def registration_worker(driver: webdriver.Chrome, thread_num: int=1):
+def registration_worker(driver: webdriver.Chrome):
     """
     執行單次掛號流程的 Worker。
     每個 Worker 會在自己的瀏覽器中執行，以實現並發操作。
     """
     try:
-        max_submit_attempts = RegistrationRule.max_submit_attempts
-        for attempt in range(max_submit_attempts):
-            print(f"[Thread-{thread_num}] 第 {attempt + 1}/{max_submit_attempts} 次嘗試提交...")
+        attempt = 0
+        is_success = False
+
+        while check_time():
+            print(f"[+] 開始第 {attempt + 1} 次掛號 ...")
             try:
                 # 填寫身分證和生日
                 birthday = PersionalInfo.personal_birthday
@@ -89,7 +87,7 @@ def registration_worker(driver: webdriver.Chrome, thread_num: int=1):
                     driver.refresh()
                     continue
                 
-                print(f"[Thread-{thread_num}][+] 驗證碼辨識結果: {captcha_code}")
+                print(f"[+] 驗證碼辨識結果: {captcha_code}")
                 driver.find_element(By.ID, 'validText').send_keys(captcha_code)
                 driver.find_element(By.ID, "patientIdentityConfirm").click()
                 
@@ -100,41 +98,50 @@ def registration_worker(driver: webdriver.Chrome, thread_num: int=1):
                 page_text = driver.find_element(By.TAG_NAME, "body").text
 
                 if "*錯誤" in page_text:
-                    if attempt == max_submit_attempts - 1:
-                        print(f"[Thread-{thread_num}][CRITICAL] 已達重試最大次數 {max_submit_attempts} 次，掛號失敗。")
-
-                    print(f"[Thread-{thread_num}][!] 掛號發生錯誤，重新整理頁面。")
+                    print(f"[x] 掛號發生錯誤，重新整理頁面。")
                     driver.refresh()
                     continue
                 else:
-                    print(f"[Thread-{thread_num}][+] 掛號成功！")
+                    is_success = True
                     break
 
             except (NoSuchElementException, TimeoutException) as e:
-                print(f"[Thread-{thread_num}][-] 頁面元素載入失敗或超時，重新整理頁面: {e}")
+                print(f"[-] 頁面元素載入失敗或超時，重新整理頁面: {e}")
                 driver.refresh()
                 time.sleep(1)
     except Exception as e:
-        print(f"[Thread-{thread_num}][CRITICAL] Worker 發生嚴重錯誤: {e}")
+        print(f"[x][CRITICAL] Worker 發生嚴重錯誤: {e}")
     finally:
         if driver:
             driver.quit()
-        print(f"[Thread-{thread_num}] 線程結束。")
-    return False
+        print(f"[+] 線程結束。")
+    
+    return is_success
+
+def check_time() -> bool:
+    """
+    檢查當前時間是否已過 2 分鐘，超過停止掛號
+    """
+    stop_minute = (datetime.now(tz=timezone.utc) + timedelta(hours=8)).strftime("%M")
+
+    if stop_minute == "02":
+        print("[*] 已超過 02 分，停止尋找可掛號日期。")
+        return False
+
+    return True
 
 def find_available_slot(driver: webdriver.Chrome) -> str | None:
     """
     在主瀏覽器中尋找可用的掛號連結。
     """
-    find_slot = False
-    wait_time = 0.2
-    max_refresh_attempts = RegistrationRule.max_refresh_attempts
+    wait_time = RegistrationRule.wait_check_available_slot_interval
+    attempt = 0
     target_doctor = DoctorInfo.doctor_name
     except_today_date = (datetime.now(tz=timezone.utc) + timedelta(hours=8)).strftime("%m/%d")[1:]
     expect_rules = RegistrationRule.exclude_keywords
     expect_rules.append(except_today_date)
     
-    for attempt in range(max_refresh_attempts):
+    while check_time():
         try:
             # 找到包含醫生名字的 table row
             # **注意**: 這個 XPath 可能需要根據實際網頁結構修改
@@ -156,19 +163,18 @@ def find_available_slot(driver: webdriver.Chrome) -> str | None:
                 
                 return True
             else:
-                print(f"[-] 未找到 {target_doctor} 醫生的可掛號時段。 ({attempt + 1}/{max_refresh_attempts})")
+                print(f"[-] 查詢 {attempt + 1} 後未找到 {target_doctor} 醫生的可掛號時段。 重整頁面後繼續搜尋...")
                 driver.refresh()
                 time.sleep(wait_time)
 
-        except (TimeoutException) as e:
-            if attempt == max_refresh_attempts - 1:
-                print(f"[!] 無法找到 {target_doctor} 醫生的資訊，可能頁面結構已變更或醫生本日無門診。")
-                return find_slot
-
+        except (TimeoutException):
             print(f"[!] 無法找到 {target_doctor} 醫生的資訊，可能頁面結構已變更或醫生本日無門診。")
             print(f"[-] 等待 {wait_time} 秒後再搜尋一次")
             time.sleep(wait_time)
-            continue
+        except Exception as e:
+            print(f"[CRITICAL] 尋找可掛號時段發生嚴重錯誤: {e}")
+
+    return False
 
 def get_driver_options() -> Options:
     """
@@ -201,8 +207,7 @@ def main():
     try:
         #with uc.Chrome(options=uc.ChromeOptions(), version_main=147) as driver:
         with webdriver.Chrome(options=get_driver_options()) as driver:
-            # 3. 前往目標網站
-            driver.get(RegistrationRule.base_url)
+            driver.get(f"{RegistrationRule.dep_base_url}{HospitalInfo.hospital_code_mapping[RegistrationRule.hospital]}")
             dep_keyword = DoctorInfo.doctor_dep_keyword
             # 1. 點擊科別
             print(f"[*] 正在尋找科別: {dep_keyword}")
@@ -218,9 +223,14 @@ def main():
             
             if find_slot:
                 # 3. 啟動掛號 Worker
-                registration_worker(driver)
+                regis_result = registration_worker(driver)
             else:
                 print(f"[-] 沒有找到可掛號的連結，結束程式。")
+            
+            if regis_result:
+                print(f"[+] 掛號成功。")
+            else:
+                print(f"[-] 掛號失敗。")
     finally:
         # 主瀏覽器完成任務後即可關閉
         if driver:
